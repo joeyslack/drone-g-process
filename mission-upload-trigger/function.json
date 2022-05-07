@@ -1,0 +1,12 @@
+{
+  "bindings": [
+    {
+      "name": "myBlob",
+      "type": "blobTrigger",
+      "direction": "in",
+      "path": "larry-gather-test/{blobname}/mission_report.json",
+      "connection": "AzureWebJobsStorage"
+    }
+  ],
+  "scriptFile": "../built/mission-upload-trigger/index.js"
+}

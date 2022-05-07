@@ -1,0 +1,43 @@
+{
+  "name": "gather-process",
+  "version": "0.0.1",
+  "description": "Process mission.json files to modeled data",
+  "main": "index.js",
+  "scripts": {
+    "process:json": "node --experimental-modules process_json.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "prestart": "npm run build",
+    "start": "func start",
+    "deploy:prod": "mv .env .development.env && cp .production.env .env && func azure functionapp publish gather-upload-functions && mv .development.env .env",
+    "clean": "ts-node clean.ts",
+    "drop": "ts-node drop.ts",
+    "import": "npm run clean && ts-node test_mappings.ts",
+    "import:prod": "mv .env .env.bak && cp .production.env .env && npm run clean && ts-node test_mappings.ts && mv .env.bak .env"
+  },
+  "author": "Joseph Slack <joseph@gather.ai>",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/functions": "^1.2.0",
+    "@azure/storage-blob": "^12.1.1",
+    "@nodelib/fs.scandir": "^2.1.3",
+    "dotenv": "^8.2.0",
+    "fs": "0.0.1-security",
+    "jimp": "^0.10.3",
+    "moment": "^2.26.0",
+    "node-fetch": "^2.6.0",
+    "pg": "^7.18.2",
+    "sql-query-generator": "^1.4.0",
+    "typescript": "^3.9.4",
+    "winston": "^3.2.1",
+    "winston-loggly-bulk": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.9.5",
+    "ts-node": "^8.10.1"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  }
+}

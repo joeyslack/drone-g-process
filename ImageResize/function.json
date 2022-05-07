@@ -1,0 +1,12 @@
+{
+  "bindings": [
+    {
+      "name": "myBlob",
+      "type": "blobTrigger",
+      "direction": "in",
+      "path": "testresize/{blobname}/HRes{imagename}",
+      "connection": "AzureWebJobsStorage"
+    }
+  ],
+  "scriptFile": "../built/ImageResize/index.js"
+}

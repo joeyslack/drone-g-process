@@ -1,0 +1,256 @@
+{
+    "id": "0c956389",
+    "version": "2020-07-10",
+    "createdDate": "2020-07-05T00:00:00",
+    "locations": [
+      {
+        "id": "0c956389",
+        "hierarchyLevel": 0,
+        "locationType": "warehouse",
+        "name": "LarryWarehouse"
+      },
+      {
+        "id": "330be388",
+        "parentId": "0c956389",
+        "hierarchyLevel": 1,
+        "locationType": "aisle",
+        "position": 0,
+        "name": "A1",
+        "side": "left"
+      },
+      {
+        "id": "7d233f55",
+        "parentId": "330be388",
+        "hierarchyLevel": 2,
+        "locationType": "rack",
+        "position": 0,
+        "name": "R1",
+        "side": "left"
+      },
+      {
+        "id": "20384e5d",
+        "parentId": "7d233f55",
+        "hierarchyLevel": 3,
+        "locationType": "bin",
+        "position": 0,
+        "name": "B1",
+        "clientLocation": "GA00B0",
+        "side": "left"
+      },
+      {
+        "id": "0736f687",
+        "parentId": "7d233f55",
+        "hierarchyLevel": 3,
+        "locationType": "bin",
+        "position": 1,
+        "name": "B2",
+        "clientLocation": "GA00B1",
+        "side": "left"
+      },
+      {
+        "id": "9784a129",
+        "parentId": "7d233f55",
+        "hierarchyLevel": 3,
+        "locationType": "bin",
+        "position": 2,
+        "name": "B3",
+        "clientLocation": "GA00B2",
+        "side": "left"
+      },
+      {
+        "id": "1f2468bf",
+        "parentId": "330be388",
+        "hierarchyLevel": 2,
+        "locationType": "rack",
+        "position": 1,
+        "name": "R2",
+        "side": "left"
+      },
+      {
+        "id": "a2aa1d70",
+        "parentId": "1f2468bf",
+        "hierarchyLevel": 3,
+        "locationType": "bin",
+        "position": 0,
+        "name": "B1",
+        "clientLocation": "GA01B0",
+        "side": "left"
+      },
+      {
+        "id": "a4a6613c",
+        "parentId": "1f2468bf",
+        "hierarchyLevel": 3,
+        "locationType": "bin",
+        "position": 1,
+        "name": "B2",
+        "clientLocation": "GA01B1",
+        "side": "left"
+      },
+      {
+        "id": "fd72351a",
+        "parentId": "1f2468bf",
+        "hierarchyLevel": 3,
+        "locationType": "bin",
+        "position": 2,
+        "name": "B3",
+        "clientLocation": "GA01B2",
+        "side": "left"
+      },
+      {
+        "id": "5ef514b3",
+        "parentId": "330be388",
+        "hierarchyLevel": 2,
+        "locationType": "rack",
+        "position": 2,
+        "name": "R3",
+        "side": "left"
+      },
+      {
+        "id": "a52e50a0",
+        "parentId": "5ef514b3",
+        "hierarchyLevel": 3,
+        "locationType": "bin",
+        "position": 0,
+        "name": "B1",
+        "clientLocation": "GA02B0",
+        "side": "left"
+      },
+      {
+        "id": "c77e1300",
+        "parentId": "5ef514b3",
+        "hierarchyLevel": 3,
+        "locationType": "bin",
+        "position": 1,
+        "name": "B2",
+        "clientLocation": "GA02B1",
+        "side": "left"
+      },
+      {
+        "id": "034fabf2",
+        "parentId": "5ef514b3",
+        "hierarchyLevel": 3,
+        "locationType": "bin",
+        "position": 2,
+        "name": "B3",
+        "clientLocation": "GA02B2",
+        "side": "left"
+      },
+      {
+        "id": "15c58489",
+        "parentId": "330be388",
+        "hierarchyLevel": 2,
+        "locationType": "rack",
+        "position": 3,
+        "name": "R4",
+        "side": "left"
+      },
+      {
+        "id": "f3821a32",
+        "parentId": "15c58489",
+        "hierarchyLevel": 3,
+        "locationType": "bin",
+        "position": 0,
+        "name": "B1",
+        "clientLocation": "GA03B0",
+        "side": "left"
+      },
+      {
+        "id": "2666555b",
+        "parentId": "15c58489",
+        "hierarchyLevel": 3,
+        "locationType": "bin",
+        "position": 1,
+        "name": "B2",
+        "clientLocation": "GA03B1",
+        "side": "left"
+      },
+      {
+        "id": "4f836e56",
+        "parentId": "15c58489",
+        "hierarchyLevel": 3,
+        "locationType": "bin",
+        "position": 2,
+        "name": "B3",
+        "clientLocation": "GA03B2",
+        "side": "left"
+      },
+      {
+        "id": "740d9ebc",
+        "parentId": "330be388",
+        "hierarchyLevel": 2,
+        "locationType": "rack",
+        "position": 4,
+        "name": "R5",
+        "side": "left"
+      },
+      {
+        "id": "ceae81da",
+        "parentId": "740d9ebc",
+        "hierarchyLevel": 3,
+        "locationType": "bin",
+        "position": 0,
+        "name": "B1",
+        "clientLocation": "GA04B0",
+        "side": "left"
+      },
+      {
+        "id": "cccd75eb",
+        "parentId": "740d9ebc",
+        "hierarchyLevel": 3,
+        "locationType": "bin",
+        "position": 1,
+        "name": "B2",
+        "clientLocation": "GA04B1",
+        "side": "left"
+      },
+      {
+        "id": "2156b5df",
+        "parentId": "740d9ebc",
+        "hierarchyLevel": 3,
+        "locationType": "bin",
+        "position": 2,
+        "name": "B3",
+        "clientLocation": "GA04B2",
+        "side": "left"
+      },
+      {
+        "id": "7862105c",
+        "parentId": "330be388",
+        "hierarchyLevel": 2,
+        "locationType": "rack",
+        "position": 5,
+        "name": "R6",
+        "side": "left"
+      },
+      {
+        "id": "162e8368",
+        "parentId": "7862105c",
+        "hierarchyLevel": 3,
+        "locationType": "bin",
+        "position": 0,
+        "name": "B1",
+        "clientLocation": "GA05B0",
+        "side": "left"
+      },
+      {
+        "id": "a6a50449",
+        "parentId": "7862105c",
+        "hierarchyLevel": 3,
+        "locationType": "bin",
+        "position": 1,
+        "name": "B2",
+        "clientLocation": "GA05B1",
+        "side": "left"
+      },
+      {
+        "id": "48102011",
+        "parentId": "7862105c",
+        "hierarchyLevel": 3,
+        "locationType": "bin",
+        "position": 2,
+        "name": "B3",
+        "clientLocation": "GA05B2",
+        "side": "left"
+      }
+    ]
+}

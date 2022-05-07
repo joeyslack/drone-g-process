@@ -1,0 +1,137 @@
+// Global env vars. PG env vars allow client.connect
+require('dotenv').config();
+
+// Get current project
+const fs = require('fs');
+const targetMission = '20200325T081401-0400';
+const currentMission = fs.readFileSync('process_current/' + targetMission + '/mission_report.json', 'utf8');
+
+// Connect to sql-staging
+const { Pool, Client } = require('pg');
+const client = new Client();
+client.connect();
+
+// Use custom sql generator
+import { SqlInsertGenerator } from './sql-generator';
+
+// JSON mission data
+const root = JSON.parse(currentMission);
+let insert = [];
+
+// Model Mappings...
+import { Warehouse } from './mappings/warehouse';
+import { Mission } from './mappings/mission';
+import { Product } from './mappings/product';
+import { Structure } from './mappings/structure';
+import { Bin } from './mappings/bin';
+import { MissionBin } from './mappings/mission_bin';
+import { InventoryGallery } from './mappings/inventory_gallery';
+import { InventoryItem } from './mappings/inventory_item';
+
+// Constants? Setting as variables so we can override if needed as we go
+// TODO: Make this come from DB instead of initial commit?
+let userId = 1;
+let warehouseId = 1;
+let missionId = 1;
+let binResults = [];
+let productResults = [];
+let galleriesResults = [];
+
+// Process all... sequential order of cascading dependencies
+
+// 1. Warehouse (depends on: userId)
+const warehouse = new Warehouse(root).process(userId);
+client.query(new SqlInsertGenerator("warehouse", warehouse), (err, res) => {
+  if (err) throw (err);
+  if (res && res.rows[0] && res.rows[0].id) {
+    warehouseId = res.rows[0].id;
+  }
+});
+
+// 2. Mission (depends on: userId, warehouseId, targetMission)
+const mission = new Mission(root).process(userId, targetMission, warehouseId);
+client.query(new SqlInsertGenerator("mission", mission), (err, res) => {
+  if (err) throw (err);
+  if (res && res.rows[0] && res.rows[0].id) {
+    missionId = res.rows[0].id;
+  }
+});
+
+// 3. Product (depends on: userId, warehouseId)
+// TODO: check existing products before inserting these.... maybe return DB ids, and compare in a hash before insert?
+const products = new Product(root).process(userId, warehouseId);
+products.forEach((product) => {
+  console.log(new SqlInsertGenerator("product", product));
+  // client.query(new SqlInsertGenerator("product", product));
+});
+
+
+// 4. Structure (depends on: userId, warehouseId)
+const structures = new Structure(root).process(userId, warehouseId);
+structures.forEach(structure => {
+  console.log(new SqlInsertGenerator("structure", structure));
+  // client.query(new SqlInsertGenerator("structure", structure));
+})
+
+// 5. Bin (depends on: userId)
+const bins = new  Bin(root).process(userId, structures);
+bins.forEach(bin => {
+  // console.log(new SqlInsertGenerator("bin", bin));
+  client.query(new SqlInsertGenerator("structure", bin), (err, res) => {
+    if (err) throw (err);
+    if (res && res.rows) {
+      binResults = res.rows; 
+    }
+  });
+});
+
+// 6. Mission_Bin (depends on: userId, missionId, bins)
+client.query("SELECT * FROM bin", (err, binResults) => {
+  if (err) throw (err);
+  if (binResults && binResults.rows) {
+    // console.log(err, binResults);
+    const mbins = new  MissionBin(root).process(userId, missionId, binResults.rows);
+    Object.keys(mbins).forEach(key => {
+      console.log(new SqlInsertGenerator("mission_bin", mbins[key]));
+      // client.query(new SqlInsertGenerator("structure", structure));
+    });
+  }
+});
+
+// 7. Inventory_Gallery (depends on: userId, targetMission)
+const inventoryGalleries = new InventoryGallery(root).process(userId, targetMission);
+Object.keys(inventoryGalleries).forEach(gallery => {
+  console.log(new SqlInsertGenerator("inventory_gallery", gallery));
+  client.query(new SqlInsertGenerator("inventory_gallery", gallery), (err, res) => {
+    if (err) throw (err);
+    if (res && res.rows) {
+      galleriesResults = res.rows;
+    }
+  });
+});
+
+
+// 8. Inventory_items (depends on: userId, targetMission, product, galleries, bins, missionbins)
+client.query('SELECT * FROM product', (err, products) => {
+  client.query('SELECT * FROM bin', (err, bins) => {
+    client.query('SELECT * FROM mission_bin', (err, mbins) => {
+      const inventoryItems = new InventoryItem(root).process(userId, targetMission, products, galleriesResults, bins, mbins);
+    })
+  })
+});
+
+
+// insert.push(new)
+// insert.push(new SqlInsertGenerator("mission", Mission));
+
+// insert.forEach((object, index) => {
+//    client.query({text: object.text, values: object.values}, (err, res) => {
+//     console.log(err, res);
+//   });
+// });
+
+const executeQuery = function(query, debug = false) {
+  if (debug) {
+    console.log(query);
+  }
+}

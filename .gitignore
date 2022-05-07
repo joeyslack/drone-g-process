@@ -1,0 +1,15 @@
+node_modules/
+migrations/
+process_current/
+built/
+
+
+.env
+.larry-gather-test.env
+*.env
+.*.env
+.production.env
+.saladinos.env
+.vscode
+local.settings.json
+process_current/
